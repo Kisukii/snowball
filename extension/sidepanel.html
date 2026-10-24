@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Snow Ball</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+
+<body>
+  <header>
+    <span
+      class="pet"
+      id="cat"
+      aria-label="Snow Ball, a purple pixel cat"
+    ></span>
+
+    <p class="eyebrow">YOUR PATIENT LITTLE GUIDE</p>
+    <h1>Snow Ball</h1>
+    <p>आप करें, Snow Ball साथ चले।</p>
+  </header>
+
+  <main>
+    <div
+      class="input-modes"
+      role="group"
+      aria-label="Choose how to share your goal"
+    >
+      <button id="type" aria-pressed="true">
+        ⌨ Type / लिखें
+      </button>
+
+      <button id="talk" aria-pressed="false">
+        🎙 Talk / बोलें
+      </button>
+    </div>
+
+    <p id="input-hint" class="hint">
+      Type your goal below. No microphone needed.
+    </p>
+
+    <label for="goal">
+      आप क्या करना चाहते हैं?
+    </label>
+
+    <textarea
+      id="goal"
+      rows="4"
+      maxlength="300"
+      placeholder="मुझे दिल्ली से मुंबई का टिकट बुक करना है"
+    ></textarea>
+
+    <p class="privacy">
+      🔒 पासवर्ड, OTP या कार्ड की जानकारी यहाँ न लिखें।
+    </p>
+
+    <div class="actions">
+      <button id="mic" aria-label="Speak your goal">
+        🎙 बोलें
+      </button>
+
+      <button id="start" class="primary">
+        साथ चलें →
+      </button>
+    </div>
+
+    <section aria-live="polite">
+      <span id="progress">
+        एक छोटा कदम, एक बार में
+      </span>
+
+      <p id="instruction">
+        🐾 अपना लक्ष्य बताइए। मैं आपको रास्ता दिखाऊँगा।
+      </p>
+
+      <p id="warning"></p>
+    </section>
+
+    <div class="actions">
+      <button id="replay">🔊 फिर सुनें</button>
+      <button id="continue">अगला कदम →</button>
+      <button id="stop">रोकें</button>
+    </div>
+
+    <p class="hint">
+      Snow Ball केवल इशारा करता है।
+      हर क्लिक और भुगतान आप खुद करें।
+      लिखने या सूची चुनने के बाद “अगला कदम” दबाएँ।
+    </p>
+
+    <details id="settings">
+      <summary>⚙ Settings / सेटिंग्स</summary>
+
+      <label for="language">भाषा · Language</label>
+
+      <select id="language">
+        <option value="hi">हिन्दी</option>
+        <option value="en">English</option>
+        <option value="ta">தமிழ்</option>
+      </select>
+
+      <label class="check">
+        <input id="voice" type="checkbox" checked>
+        Read instructions aloud / आवाज़ में सुनें
+      </label>
+
+      <label for="input-mode">
+        Preferred input / अपना तरीका
+      </label>
+
+      <select id="input-mode">
+        <option value="type">Type / लिखें</option>
+        <option value="talk">Talk / बोलें</option>
+      </select>
+
+      <p>
+        Preferences save automatically.
+        You can always type instead of speaking.
+      </p>
+
+      <details>
+        <summary>Backend connection</summary>
+
+        <label for="backend">Backend URL</label>
+
+        <input
+          id="backend"
+          type="url"
+          value="http://localhost:8000"
+        >
+
+        <button id="save">Save connection</button>
+
+        <p>
+          Use HTTPS for a deployed backend.
+          API keys stay on the backend.
+        </p>
+      </details>
+    </details>
+
+    <p id="status" role="status"></p>
+  </main>
+
+  <script src="sprite.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

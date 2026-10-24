@@ -1,0 +1,186 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #35234e;
+  background: #faf7ff;
+  font-size: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  padding: 30px 22px 20px;
+  background: #e5d3fa;
+  border-bottom: 2px solid #35234e;
+}
+
+h1 {
+  font-size: 48px;
+  letter-spacing: -3px;
+  margin: 0;
+}
+
+.pet {
+  float: right;
+  width: 90px;
+  height: 90px;
+}
+
+.pet svg {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+header p:last-child {
+  margin-bottom: 0;
+}
+
+main {
+  padding: 22px;
+}
+
+label {
+  display: block;
+  font-weight: 700;
+  margin: 18px 0 8px;
+}
+
+textarea,
+select,
+input {
+  width: 100%;
+  font: inherit;
+  border: 2px solid #ae92cc;
+  border-radius: 12px;
+  padding: 12px;
+  background: white;
+  color: inherit;
+}
+
+textarea:focus,
+select:focus,
+input:focus,
+button:focus-visible {
+  outline: 3px solid #7745b5;
+  outline-offset: 3px;
+}
+
+button {
+  font: 700 17px system-ui;
+  cursor: pointer;
+  min-height: 48px;
+  border: 2px solid #35234e;
+  border-radius: 12px;
+  background: #f1e8fc;
+  color: inherit;
+  padding: 10px 14px;
+  box-shadow: 0 3px 0 #35234e;
+}
+
+.primary {
+  background: #7040a5;
+  color: white;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.input-modes {
+  display: flex;
+  gap: 10px;
+}
+
+.input-modes button {
+  flex: 1;
+}
+
+.input-modes [aria-pressed="true"] {
+  background: #7040a5;
+  color: white;
+}
+
+section {
+  background: #eee3fa;
+  border-radius: 18px;
+  padding: 20px;
+  margin-top: 28px;
+}
+
+#progress {
+  font-size: 13px;
+  font-weight: 800;
+  color: #7040a5;
+}
+
+#instruction {
+  font-size: 25px;
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+#warning {
+  color: #8c301b;
+  font-weight: 700;
+}
+
+.privacy,
+.hint,
+details p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #67594e;
+}
+
+details {
+  border-top: 1px solid #d9cbb6;
+  padding-top: 20px;
+  margin-top: 24px;
+}
+
+summary {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.check input {
+  width: 22px;
+  height: 22px;
+  accent-color: #7040a5;
+}
+
+#status {
+  font-size: 15px;
+  color: #8c301b;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+#mic[hidden] {
+  display: none;
+}

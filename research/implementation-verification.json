@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-25",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "live_checks": {
+    "page_controls": {
+      "passed": true,
+      "seconds": 3.53
+    },
+    "synthetic_screenshot": {
+      "passed": true,
+      "seconds": 6.74
+    }
+  },
+  "regression_tests": {
+    "backend": 13,
+    "native_windows_smoke": "passed",
+    "browser_controls_and_guidance": "passed"
+  },
+  "limits": [
+    "Synthetic provider checks, not a reliability benchmark",
+    "Screenshot guidance uses the primary monitor and does not click",
+    "Native speech input uses Windows dictation",
+    "Specific government sites and Instagram need acceptance testing"
+  ],
+  "reuse": "Clicky MIT flight math adapted; other projects informed architecture, not wholesale imports"
+}

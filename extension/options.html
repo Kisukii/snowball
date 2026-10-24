@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+  <title>Snow Ball desktop pairing</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <div id="cat"></div>
+    <h1>Meet me on your taskbar.</h1>
+
+    <p>
+      Start the Snow Ball desktop app.
+      Click the cat, then
+      <strong>Copy Chrome pairing code</strong>.
+      Paste that code here once.
+    </p>
+
+    <label for="token">Desktop pairing code</label>
+    <input
+      id="token"
+      type="password"
+      autocomplete="off"
+      spellcheck="false"
+    >
+
+    <button id="pair">Connect to my cat</button>
+    <button id="disconnect">Unpair</button>
+
+    <p id="status" role="status">
+      Not connected yet.
+    </p>
+
+    <p class="note">
+      This code connects Chrome to your desktop pet.
+      It is separate from your AI API key.
+      Never put an API key here.
+    </p>
+
+    <h2>When paired</h2>
+
+    <p>
+      Open your website, click the desktop cat,
+      type a goal and press
+      <strong>Navigate me</strong>.
+      Use <strong>Come back</strong>
+      to return to the taskbar.
+    </p>
+  </main>
+
+  <script src="sprite.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

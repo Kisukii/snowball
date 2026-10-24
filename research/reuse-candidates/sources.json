@@ -1,0 +1,60 @@
+{
+  "retrieved": "2026-10-25",
+  "purpose": "Unmodified source samples for evaluation, not integrated or executable standalone.",
+  "files": [
+    {
+      "file": "clicky-windows/ai/universal_locator.py",
+      "repository": "Bitshank-2338/clicky-windows",
+      "revision": "c00831a545cdfc695559ce3a6ebe77547f19e352",
+      "url": "https://raw.githubusercontent.com/Bitshank-2338/clicky-windows/c00831a545cdfc695559ce3a6ebe77547f19e352/ai/universal_locator.py"
+    },
+    {
+      "file": "clicky-windows/ai/base_provider.py",
+      "repository": "Bitshank-2338/clicky-windows",
+      "revision": "c00831a545cdfc695559ce3a6ebe77547f19e352",
+      "url": "https://raw.githubusercontent.com/Bitshank-2338/clicky-windows/c00831a545cdfc695559ce3a6ebe77547f19e352/ai/base_provider.py"
+    },
+    {
+      "file": "clicky-windows/ui/overlay.py",
+      "repository": "Bitshank-2338/clicky-windows",
+      "revision": "c00831a545cdfc695559ce3a6ebe77547f19e352",
+      "url": "https://raw.githubusercontent.com/Bitshank-2338/clicky-windows/c00831a545cdfc695559ce3a6ebe77547f19e352/ui/overlay.py"
+    },
+    {
+      "file": "clicky-windows/requirements.txt",
+      "repository": "Bitshank-2338/clicky-windows",
+      "revision": "c00831a545cdfc695559ce3a6ebe77547f19e352",
+      "url": "https://raw.githubusercontent.com/Bitshank-2338/clicky-windows/c00831a545cdfc695559ce3a6ebe77547f19e352/requirements.txt"
+    },
+    {
+      "file": "nanobrowser/src/browser-control/core/tools/act.ts",
+      "repository": "nanobrowser/nanobrowser",
+      "revision": "19dc8e8a9be6ed06c0ef9ec7de8d84bf6a88c458",
+      "url": "https://raw.githubusercontent.com/nanobrowser/nanobrowser/19dc8e8a9be6ed06c0ef9ec7de8d84bf6a88c458/src/browser-control/core/tools/act.ts"
+    },
+    {
+      "file": "nanobrowser/src/browser-control/core/perception/observe.ts",
+      "repository": "nanobrowser/nanobrowser",
+      "revision": "19dc8e8a9be6ed06c0ef9ec7de8d84bf6a88c458",
+      "url": "https://raw.githubusercontent.com/nanobrowser/nanobrowser/19dc8e8a9be6ed06c0ef9ec7de8d84bf6a88c458/src/browser-control/core/perception/observe.ts"
+    },
+    {
+      "file": "nanobrowser/LICENSE",
+      "repository": "nanobrowser/nanobrowser",
+      "revision": "19dc8e8a9be6ed06c0ef9ec7de8d84bf6a88c458",
+      "url": "https://raw.githubusercontent.com/nanobrowser/nanobrowser/19dc8e8a9be6ed06c0ef9ec7de8d84bf6a88c458/LICENSE"
+    },
+    {
+      "file": "clicky-windows/UPSTREAM-CLICKY-LICENSE",
+      "repository": "farzaa/clicky",
+      "revision": "main",
+      "url": "https://raw.githubusercontent.com/farzaa/clicky/main/LICENSE"
+    },
+    {
+      "file": "clicky-windows/LICENSE",
+      "repository": "Bitshank-2338/clicky-windows",
+      "url": "https://raw.githubusercontent.com/Bitshank-2338/clicky-windows/main/LICENSE",
+      "note": "Fetched from main; code files pinned separately."
+    }
+  ]
+}

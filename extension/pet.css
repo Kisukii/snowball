@@ -1,0 +1,18 @@
+[data-pawly-target] {
+  outline: 5px solid #a46be0 !important;
+  outline-offset: 5px !important;
+  animation: pawly-pulse 1.3s infinite !important;
+}
+
+@keyframes pawly-pulse {
+  50% {
+    outline-color: #f0a5df;
+    outline-offset: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-pawly-target] {
+    animation: none !important;
+  }
+}
