@@ -179,6 +179,8 @@ class SnowBall:
         self.voice_processing = False
         self.exit_started = None
         self.exit_origin = None
+        self.walking = None
+        self.next_walk_at = time.monotonic() + 60
 
         self.bridge = Bridge(
             self.config["token"],
@@ -222,6 +224,8 @@ class SnowBall:
         )
 
     def start_drag(self, event):
+        self.walking = None
+        self.next_walk_at = time.monotonic() + 60
         self.drag_origin = (
             event.x_root, event.y_root,
             self.root.winfo_x(), self.root.winfo_y(),
@@ -247,6 +251,7 @@ class SnowBall:
             return
         self.drag(event)
         self.drag_origin = None
+        self.next_walk_at = time.monotonic() + 60
         if not self.dragged:
             self.open_chat()
 
@@ -258,6 +263,9 @@ class SnowBall:
         tail_sway = round(wave * 0.6)
         breath = round(math.sin(self.frame / 18))
         standing = min(1, (time.monotonic() - self.exit_started) / .35) if self.exit_started is not None else 0
+        if self.walking:
+            standing = min(1, (time.monotonic() - self.walking[2]) / .3)
+        stride = math.sin((time.monotonic() - self.walking[2]) * 12) if self.walking else 0
 
         def standing_y(y):
             return y - 14 * standing + max(0, y - 82) * 14 * standing / 18
@@ -301,10 +309,12 @@ class SnowBall:
         pixel(54, 58 + breath, 26, 4, PALE)
 
         for x in (60, 113):
-            pixel(x, 82, 16, 18, OUTLINE)
-            pixel(x + 3, 83, 10, 14, PALE)
-            pixel(x + 5, 94, 2, 3, PURPLE)
-            pixel(x + 8, 94, 2, 3, PURPLE)
+            step = stride if x == 60 else -stride
+            foot_x, foot_y = round(x + 5 * step), round(82 - max(0, step) * 5)
+            pixel(foot_x, foot_y, 16, 18, OUTLINE)
+            pixel(foot_x + 3, foot_y + 1, 10, 14, PALE)
+            pixel(foot_x + 5, foot_y + 12, 2, 3, PURPLE)
+            pixel(foot_x + 8, foot_y + 12, 2, 3, PURPLE)
 
         head_y = 30 if awake else 35
 
@@ -357,6 +367,40 @@ class SnowBall:
                 fill="#9871bc",
                 font=("Segoe UI", 12),
             )
+        if self.walking and self.walking[1][0] < self.walking[0][0]:
+            canvas.scale('all', 84, 58, -1, 1)
+
+    def update_walking(self, now):
+        windows = (self.chat, getattr(self, 'settings_window', None))
+        busy = (self.guiding or self.screen_mode or self.drag_origin is not None
+                or self.voice_input is not None or self.flight_started is not None
+                or any(w and w.winfo_exists() and w.winfo_viewable() for w in windows)
+                or not self.root.winfo_viewable())
+        if busy:
+            self.walking = None
+            self.next_walk_at = now + 60
+            return
+        if self.walking is None:
+            if now < self.next_walk_at:
+                return
+            width = self.user32.GetSystemMetrics(0)
+            start = (self.root.winfo_x(), self.root.winfo_y())
+            target_x = 28 if start[0] + 84 > width / 2 else max(28, width - 196)
+            distance = abs(target_x - start[0])
+            if distance < 8:
+                self.next_walk_at = now + 60
+                return
+            self.walking = (start, (target_x, start[1]), now, max(2, distance / 150))
+        start, end, began, duration = self.walking
+        t = min(1, max(0, (now - began) / duration))
+        # Smooth acceleration, followed by a steady, visible walk across the screen.
+        progress = t * t * (3 - 2 * t)
+        self.custom_position = (round(start[0] + (end[0] - start[0]) * progress), start[1])
+        x, y = self.custom_position
+        self.root.geometry(f'168x116+{max(0, x)}+{max(0, y)}')
+        if t >= 1:
+            self.walking = None
+            self.next_walk_at = now + 60
 
     def animate(self):
         self.frame += 1
@@ -380,9 +424,8 @@ class SnowBall:
             self.root.after(16, self.animate)
             return
 
-        self.draw(
-            awake=self.guiding or self.chat is not None
-        )
+        self.update_walking(time.monotonic())
+        self.draw(awake=self.guiding or self.walking is not None or self.chat is not None)
 
         if self.screen_flight is not None:
             start, end, began = self.screen_flight
@@ -411,6 +454,7 @@ class SnowBall:
 
         elif (
             not self.guiding
+            and self.walking is None
             and self.drag_origin is None
             and self.frame % 30 == 0
         ):
@@ -419,6 +463,8 @@ class SnowBall:
         self.root.after(40, self.animate)
 
     def show_pet(self):
+        self.walking = None
+        self.next_walk_at = time.monotonic() + 60
         self.guiding = False
         self.flight_started = None
 
@@ -427,6 +473,8 @@ class SnowBall:
         self.root.lift()
 
     def open_chat(self):
+        self.walking = None
+        self.next_walk_at = time.monotonic() + 60
         if self.chat and self.chat.winfo_exists():
             self.chat.deiconify()
             self.chat.lift()
@@ -961,6 +1009,7 @@ class SnowBall:
     def quit(self):
         if self.exit_started is not None:
             return
+        self.walking = None
         self.cancel_voice()
         self.screen_epoch += 1
         self.screen_mode = False

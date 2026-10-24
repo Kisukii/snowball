@@ -18,10 +18,35 @@ def main():
         errors = []
         pet.root.report_callback_exception = lambda *args: errors.append(str(args[1]))
         try:
+            pet.root.update()
+            now = time.monotonic()
+            pet.next_walk_at = now + 60
+            pet.update_walking(now + 59)
+            assert pet.walking is None
+            pet.update_walking(now + 60)
+            assert pet.walking is not None
+            start, destination, began, duration = pet.walking
+            pet.update_walking(began + duration / 2)
+            assert abs(pet.custom_position[0] - (start[0] + destination[0]) / 2) <= 1
+            pet.update_walking(began + duration + .01)
+            assert pet.walking is None
+            assert pet.custom_position == destination
+            pet.root.update()
+            # The next completed walk must return to the other side.
+            again = pet.next_walk_at
+            pet.update_walking(again)
+            assert pet.walking is not None
+            second_destination = pet.walking[1]
+            assert second_destination[0] != destination[0]
+            pet.update_walking(again + pet.walking[3] + .01)
+            pet.root.update()
             pet.open_chat()
             pet.voice.set(False)
             pet.root.update()
             assert pet.chat.winfo_ismapped()
+            pet.next_walk_at = time.monotonic() - 1
+            pet.update_walking(time.monotonic())
+            assert pet.walking is None  # Never wander while someone is chatting.
             assert pet.chat.winfo_height() <= 850
             import tkinter as tk
             def descendants(widget):
@@ -137,7 +162,8 @@ def main():
                 assert pet.root.winfo_y() > pet.user32.GetSystemMetrics(1)
             assert not errors, errors
             print(json.dumps({"passed":True,"checks":["chat layout","native cat flight","target highlight",
-                  "instruction card","stop and return", "sliding language toggle", "jump off screen on close"],"callback_errors":errors}))
+                  "instruction card","stop and return", "sliding language toggle", "jump off screen on close",
+                  "one-minute idle walk", "alternate sides", "pause while chatting"],"callback_errors":errors}))
         finally:
             pet.root.destroy()
 
